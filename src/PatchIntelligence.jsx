@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ShieldAlert, ShieldCheck, Clock, Search, Filter, CheckCircle, XCircle, Info, ChevronDown, AlertTriangle } from 'lucide-react';
+import { ShieldAlert, ShieldCheck, Clock, Search, Filter, CheckCircle, XCircle, Info, ChevronDown, AlertTriangle, SquareDivide } from 'lucide-react';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -19,28 +19,57 @@ function getSeverity(risk) {
 function getDescription(category, service) {
   const cat = (category || '').toLowerCase();
   const svc = (service || '').toLowerCase();
-  if (cat.includes('kernel') || svc.includes('kernel')) return 'Kernel-related package update';
-  if (cat.includes('security')) return 'Security patch for critical vulnerability';
-  if (cat.includes('network') || svc.includes('network')) return 'Network service update';
-  if (cat.includes('library') || svc.includes('lib')) return 'Shared library security update';
-  if (cat.includes('driver') || svc.includes('driver')) return 'Hardware driver update';
-  if (cat.includes('gnome') || svc.includes('desktop')) return 'Desktop environment update';
+
+  if (cat.includes('kernel')) return 'Kernel security update';
+  if (svc.includes('nginx')) return 'Web server patch';
   return 'System package security update';
 }
 
 function augmentEntry(entry) {
   return {
-    ...entry,
-    cve: entry.cve || 'N/A',
-    kb: entry.kb || 'N/A',
-    severity: entry.severity || getSeverity(entry.risk),
-    description: entry.description || getDescription(entry.category, entry.service),
-    affectedOs: entry.affectedOs || 'Ubuntu 22.04',
-    date: entry.date || TODAY,
-    status: entry.status || 'Pending',
+    package: entry.package || entry.packageName || 'N/A',
+
+    category:
+      entry.category && String(entry.category).toLowerCase() === 'unknown'
+        ? 'System'
+        : entry.category || 'System',
+
+    risk: entry.risk || 'SAFE',
+
+    cve: entry.cve || entry.cveId || 'N/A',
+
+    epss: entry.epss || entry.epssScore || '0',
+
+    severity:
+      entry.severity ||
+      getSeverity(entry.risk),
+
+    description:
+      entry.description ||
+      'Security package update',
+
+    affectedDependencies:
+      entry.affectedDependencies && String(entry.affectedDependencies).trim() !== ''
+        ? entry.affectedDependencies
+        : 'None',
+
+    affectedOs:
+      entry.affectedOs ||
+      'Ubuntu 24.04 LTS',
+
+    date:
+      entry.date ||
+      TODAY,
+
+    status:
+      entry.status ||
+      'Pending',
+
+    action:
+      entry.action ||
+      'Approval Needed',
   };
 }
-
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
 function RiskBadge({ risk }) {
@@ -77,19 +106,18 @@ const INITIAL_COUNT = 10;
 const LOAD_MORE_COUNT = 15;
 
 const ALL_COLUMNS = [
-  { label: 'Package',     key: 'package',     minW: 'min-w-[160px]' },
-  { label: 'Current',     key: 'current',     minW: 'min-w-[160px]' },
-  { label: 'Upgrade',     key: 'upgrade',     minW: 'min-w-[160px]' },
-  { label: 'Category',    key: 'category',    minW: 'min-w-[180px]' },
-  { label: 'Risk',        key: 'risk',        minW: 'min-w-[90px]'  },
-  { label: 'Service',     key: 'service',     minW: 'min-w-[140px]' },
-  { label: 'CVE ID',      key: 'cve',         minW: 'min-w-[120px]' },
-  { label: 'KB Number',   key: 'kb',          minW: 'min-w-[110px]' },
-  { label: 'Severity',    key: 'severity',    minW: 'min-w-[90px]'  },
-  { label: 'Description', key: 'description', minW: 'min-w-[220px]' },
-  { label: 'Affected OS', key: 'affectedOs',  minW: 'min-w-[130px]' },
-  { label: 'Date',        key: 'date',        minW: 'min-w-[110px]' },
-  { label: 'Status',      key: 'status',      minW: 'min-w-[100px]' },
+  { label: 'Package Name', key: 'package', minW: 'min-w-[250px]' },
+  { label: 'Category', key: 'category', minW: 'min-w-[120px]' },
+  { label: 'Risk', key: 'risk', minW: 'min-w-[100px]' },
+  { label: 'CVE ID', key: 'cve', minW: 'min-w-[140px]' },
+  { label: 'EPSS Score', key: 'epss', minW: 'min-w-[120px]' },
+  { label: 'Severity', key: 'severity', minW: 'min-w-[120px]' },
+  { label: 'Description', key: 'description', minW: 'min-w-[300px]' },
+  { label: 'Affected Dependencies', key: 'affectedDependencies', minW: 'min-w-[220px]' },
+  { label: 'Affected OS', key: 'affectedOs', minW: 'min-w-[140px]' },
+  { label: 'Date', key: 'date', minW: 'min-w-[120px]' },
+  { label: 'Status', key: 'status', minW: 'min-w-[120px]' },
+  { label: 'Action', key: 'action', minW: 'min-w-[180px]' },
 ];
 
 export default function PatchIntelligence({ role, onShowToast }) {
@@ -102,7 +130,7 @@ export default function PatchIntelligence({ role, onShowToast }) {
   // ── Fetch & poll every 5 seconds ────────────────────────────────────────
   const fetchData = useCallback(async () => {
     try {
-      const res = await fetch('/patch_report.json');
+      const res = await fetch('/api/patches');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       const parsed = Array.isArray(json) ? json : [];
@@ -241,7 +269,7 @@ export default function PatchIntelligence({ role, onShowToast }) {
           <div className="flex flex-col items-center justify-center py-20 gap-4 text-slate-500">
             <AlertTriangle size={40} className="text-amber-500/60" />
             <p className="font-bold text-sm uppercase tracking-widest">No patch data available</p>
-            <p className="text-xs text-slate-600">Could not load patch_report.json</p>
+            <p className="text-xs text-slate-600">Could not load patch data from the server</p>
           </div>
         )}
 
@@ -255,108 +283,104 @@ export default function PatchIntelligence({ role, onShowToast }) {
           </div>
         )}
 
-        {/* Table */}
-        {!fetchError && filteredData.length > 0 && (
-          <div
-            style={{ maxHeight: '520px', overflowY: 'auto', overflowX: 'auto', scrollBehavior: 'smooth' }}
+ {/* Table */}
+{!fetchError && filteredData.length > 0 && (
+  <div className="overflow-x-auto">
+    <table className="w-full min-w-[1800px]">
+      <thead>
+        <tr className="border-b border-slate-800/50 bg-slate-900/30">
+          {ALL_COLUMNS.map((column) => (
+            <th
+              key={column.key}
+              className={`px-4 py-4 text-left text-[11px] font-black uppercase tracking-widest text-slate-500 ${column.minW}`}
+            >
+              {column.label}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody className="text-sm">
+        {visibleData.map((patch, i) => (
+          <tr
+            key={`${patch.package}-${i}`}
+            className="group hover:bg-white/[0.025] transition-colors border-b border-slate-800/30"
           >
-            <table className="w-full text-left border-collapse" style={{ minWidth: '1800px' }}>
-              <thead>
-                <tr
-                  className="text-[10px] font-black text-slate-500 uppercase tracking-[0.15em]"
-                  style={{
-                    position: 'sticky',
-                    top: 0,
-                    zIndex: 10,
-                    background: 'rgb(15 23 42)',
-                    borderBottom: '1px solid rgba(51,65,85,0.5)',
-                  }}
-                >
-                  {ALL_COLUMNS.map(col => (
-                    <th
-                      key={col.key}
-                      className={`py-4 px-4 whitespace-nowrap ${col.minW}`}
-                    >
-                      {col.label}
-                    </th>
-                  ))}
-                  <th className="py-4 px-4 text-right whitespace-nowrap min-w-[100px]">Action</th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                {visibleData.map((patch, i) => (
-                  <tr
-                    key={`${patch.package}-${i}`}
-                    className="group hover:bg-white/[0.025] transition-colors border-b border-slate-800/30"
-                  >
-                    {/* Package */}
-                    <td className="py-4 px-4 font-medium text-slate-200 whitespace-nowrap">
-                      {patch.package}
-                    </td>
-                    {/* Current */}
-                    <td className="py-4 px-4 text-slate-400 font-mono text-xs whitespace-nowrap">
-                      {patch.current}
-                    </td>
-                    {/* Upgrade */}
-                    <td className="py-4 px-4 text-indigo-400 font-mono text-xs whitespace-nowrap">
-                      {patch.upgrade}
-                    </td>
-                    {/* Category */}
-                    <td className="py-4 px-4 text-slate-300 whitespace-nowrap">
-                      {patch.category}
-                    </td>
-                    {/* Risk */}
-                    <td className="py-4 px-4 whitespace-nowrap">
-                      <RiskBadge risk={patch.risk} />
-                    </td>
-                    {/* Service */}
-                    <td className="py-4 px-4 text-slate-400 whitespace-nowrap">
-                      {patch.service}
-                    </td>
-                    {/* CVE ID */}
-                    <td className="py-4 px-4 text-slate-500 whitespace-nowrap">
-                      {patch.cve}
-                    </td>
-                    {/* KB Number */}
-                    <td className="py-4 px-4 text-slate-500 whitespace-nowrap">
-                      {patch.kb}
-                    </td>
-                    {/* Severity */}
-                    <td className="py-4 px-4 whitespace-nowrap">
-                      <RiskBadge risk={patch.severity} />
-                    </td>
-                    {/* Description */}
-                    <td className="py-4 px-4 text-slate-400 text-xs max-w-[220px] truncate" title={patch.description}>
-                      {patch.description}
-                    </td>
-                    {/* Affected OS */}
-                    <td className="py-4 px-4 text-slate-400 whitespace-nowrap">
-                      {patch.affectedOs}
-                    </td>
-                    {/* Date */}
-                    <td className="py-4 px-4 text-slate-500 whitespace-nowrap text-xs">
-                      {patch.date}
-                    </td>
-                    {/* Status */}
-                    <td className="py-4 px-4 whitespace-nowrap">
-                      <StatusBadge status={patch.status} />
-                    </td>
-                    {/* Action */}
-                    <td className="py-4 px-4 text-right whitespace-nowrap">
-                      <button
-                        id={`analyze-${patch.package}-${i}`}
-                        onClick={() => handleAnalyze(patch)}
-                        className="text-xs font-bold px-4 py-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500 hover:text-white transition-all duration-200"
-                      >
-                        Analyze
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+            {/* Package Name */}
+            <td className="py-4 px-4 text-slate-200 font-medium">
+              {patch.package}
+            </td>
+
+            {/* Category */}
+            <td className="py-4 px-4 text-slate-300">
+              {patch.category}
+            </td>
+
+            {/* Risk */}
+            <td className="py-4 px-4">
+              <RiskBadge risk={patch.risk} />
+            </td>
+
+            {/* CVE */}
+            <td className="py-4 px-4 text-slate-400 font-mono">
+              {patch.cve}
+            </td>
+
+            {/* EPSS */}
+            <td className="py-4 px-4 text-cyan-400 font-semibold">
+              {patch.epss}
+            </td>
+
+            {/* Severity */}
+            <td className="py-4 px-4">
+              <RiskBadge risk={patch.severity} />
+            </td>
+
+            {/* Description */}
+            <td
+              className="py-4 px-4 text-slate-400 text-xs max-w-[300px] truncate"
+              title={patch.description}
+            >
+              {patch.description}
+            </td>
+
+            {/* Affected Dependencies */}
+            <td className="py-4 px-4 text-slate-300 text-xs max-w-[220px] truncate"
+                title={patch.affectedDependencies}>
+              {patch.affectedDependencies}
+            </td>
+
+            {/* Affected OS */}
+            <td className="py-4 px-4 text-slate-400">
+              {patch.affectedOs}
+            </td>
+
+            {/* Date */}
+            <td className="py-4 px-4 text-slate-500">
+              {patch.date}
+            </td>
+
+            {/* Status */}
+            <td className="py-4 px-4">
+              <StatusBadge status={patch.status} />
+            </td>
+
+            {/* Action */}
+            <td className="py-4 px-4">
+              <button
+                onClick={() => handleAnalyze(patch)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all duration-200"
+              >
+                <SquareDivide size={14} />
+                {patch.action}
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
 
         {/* View More footer */}
         {!fetchError && hasMore && (
