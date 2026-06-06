@@ -1,0 +1,1906 @@
+[
+  {
+    "package": "alsa-ucm-conf",
+    "current": "1.2.6.3-1ubuntu1.11",
+    "upgrade": "1.2.6.3-1ubuntu1.12",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "amd64-microcode",
+    "current": "3.20191218.1ubuntu2.2",
+    "upgrade": "3.20191218.1ubuntu2.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "apparmor",
+    "current": "3.0.4-2ubuntu2.4",
+    "upgrade": "3.0.4-2ubuntu2.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "apport-gtk",
+    "current": "2.20.11-0ubuntu82.6",
+    "upgrade": "2.20.11-0ubuntu82.10",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "apport",
+    "current": "2.20.11-0ubuntu82.6",
+    "upgrade": "2.20.11-0ubuntu82.10",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "apt-utils",
+    "current": "2.4.13",
+    "upgrade": "2.4.14",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "apt",
+    "current": "2.4.13",
+    "upgrade": "2.4.14",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "bind9-dnsutils",
+    "current": "1:9.18.39-0ubuntu0.22.04.3",
+    "upgrade": "1:9.18.39-0ubuntu0.22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "bind9-host",
+    "current": "1:9.18.39-0ubuntu0.22.04.3",
+    "upgrade": "1:9.18.39-0ubuntu0.22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "bind9-libs",
+    "current": "1:9.18.39-0ubuntu0.22.04.3",
+    "upgrade": "1:9.18.39-0ubuntu0.22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "bluez-cups",
+    "current": "5.64-0ubuntu1.3",
+    "upgrade": "5.64-0ubuntu1.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "bluez",
+    "current": "5.64-0ubuntu1.3",
+    "upgrade": "5.64-0ubuntu1.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "bsdutils",
+    "current": "1:2.37.2-4ubuntu3.4",
+    "upgrade": "1:2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "bubblewrap",
+    "current": "0.6.1-1",
+    "upgrade": "0.6.1-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "coreutils",
+    "current": "8.32-4.1ubuntu1.2",
+    "upgrade": "8.32-4.1ubuntu1.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "cups-filters-core-drivers",
+    "current": "1.28.15-0ubuntu1.2",
+    "upgrade": "1.28.15-0ubuntu1.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "cups-filters",
+    "current": "1.28.15-0ubuntu1.2",
+    "upgrade": "1.28.15-0ubuntu1.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "dconf-cli",
+    "current": "0.40.0-3",
+    "upgrade": "0.40.0-3ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "dconf-gsettings-backend",
+    "current": "0.40.0-3",
+    "upgrade": "0.40.0-3ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "dconf-service",
+    "current": "0.40.0-3",
+    "upgrade": "0.40.0-3ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "distro-info-data",
+    "current": "0.52ubuntu0.7",
+    "upgrade": "0.52ubuntu0.12",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "dmidecode",
+    "current": "3.3-3ubuntu0.1",
+    "upgrade": "3.3-3ubuntu0.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "dmsetup",
+    "current": "2:1.02.175-2.1ubuntu4",
+    "upgrade": "2:1.02.175-2.1ubuntu5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "dns-root-data",
+    "current": "2023112702~ubuntu0.22.04.1",
+    "upgrade": "2024071801~ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "dnsmasq-base",
+    "current": "2.90-0ubuntu0.22.04.1",
+    "upgrade": "2.90-0ubuntu0.22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "evince-common",
+    "current": "42.3-0ubuntu3.1",
+    "upgrade": "42.3-0ubuntu3.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "evince",
+    "current": "42.3-0ubuntu3.1",
+    "upgrade": "42.3-0ubuntu3.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "fdisk",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "fonts-noto-color-emoji",
+    "current": "2.042-0ubuntu0.22.04.1",
+    "upgrade": "2.047-0ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gir1.2-gdkpixbuf-2.0",
+    "current": "2.42.8+dfsg-1ubuntu0.3",
+    "upgrade": "2.42.8+dfsg-1ubuntu0.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gir1.2-gst-plugins-base-1.0",
+    "current": "1.20.1-1ubuntu0.2",
+    "upgrade": "1.20.1-1ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gir1.2-gstreamer-1.0",
+    "current": "1.20.3-0ubuntu1",
+    "upgrade": "1.20.3-0ubuntu1.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gir1.2-harfbuzz-0.0",
+    "current": "2.7.4-1ubuntu3.1",
+    "upgrade": "2.7.4-1ubuntu3.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gir1.2-mutter-10",
+    "current": "42.9-0ubuntu8",
+    "upgrade": "42.9-0ubuntu9",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gir1.2-nm-1.0",
+    "current": "1.36.6-0ubuntu2",
+    "upgrade": "1.36.6-0ubuntu2.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gir1.2-packagekitglib-1.0",
+    "current": "1.2.5-2ubuntu2",
+    "upgrade": "1.2.5-2ubuntu3.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gjs",
+    "current": "1.72.4-0ubuntu0.22.04.3~really.is.1.72.2.0ubuntu2",
+    "upgrade": "1.72.4-0ubuntu0.22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gnome-control-center-data",
+    "current": "1:41.7-0ubuntu0.22.04.8",
+    "upgrade": "1:41.7-0ubuntu0.22.04.9",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gnome-control-center-faces",
+    "current": "1:41.7-0ubuntu0.22.04.8",
+    "upgrade": "1:41.7-0ubuntu0.22.04.9",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gnome-control-center",
+    "current": "1:41.7-0ubuntu0.22.04.8",
+    "upgrade": "1:41.7-0ubuntu0.22.04.9",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gnome-shell-common",
+    "current": "42.9-0ubuntu2.2",
+    "upgrade": "42.9-0ubuntu2.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gnome-shell-extension-ubuntu-dock",
+    "current": "72~ubuntu5.22.04.2.1",
+    "upgrade": "72~ubuntu5.22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gnome-shell",
+    "current": "42.9-0ubuntu2.2",
+    "upgrade": "42.9-0ubuntu2.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-alsa",
+    "current": "1.20.1-1ubuntu0.2",
+    "upgrade": "1.20.1-1ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-gtk3",
+    "current": "1.20.3-0ubuntu1.1",
+    "upgrade": "1.20.3-0ubuntu1.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-packagekit",
+    "current": "1.2.5-2ubuntu2",
+    "upgrade": "1.2.5-2ubuntu3.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-plugins-base-apps",
+    "current": "1.20.1-1ubuntu0.2",
+    "upgrade": "1.20.1-1ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-plugins-base",
+    "current": "1.20.1-1ubuntu0.2",
+    "upgrade": "1.20.1-1ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-plugins-good",
+    "current": "1.20.3-0ubuntu1.1",
+    "upgrade": "1.20.3-0ubuntu1.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-pulseaudio",
+    "current": "1.20.3-0ubuntu1.1",
+    "upgrade": "1.20.3-0ubuntu1.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "gstreamer1.0-x",
+    "current": "1.20.1-1ubuntu0.2",
+    "upgrade": "1.20.1-1ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "initramfs-tools-bin",
+    "current": "0.140ubuntu13.4",
+    "upgrade": "0.140ubuntu13.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "initramfs-tools-core",
+    "current": "0.140ubuntu13.4",
+    "upgrade": "0.140ubuntu13.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "initramfs-tools",
+    "current": "0.140ubuntu13.4",
+    "upgrade": "0.140ubuntu13.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "intel-microcode",
+    "current": "3.20240813.0ubuntu0.22.04.2",
+    "upgrade": "3.20260210.0ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ipp-usb",
+    "current": "0.9.20-1ubuntu0.22.04.1",
+    "upgrade": "0.9.20-1ubuntu0.22.04.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "iproute2",
+    "current": "5.15.0-1ubuntu2",
+    "upgrade": "5.15.0-1ubuntu2.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "iputils-ping",
+    "current": "3:20211215-1",
+    "upgrade": "3:20211215-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "iputils-tracepath",
+    "current": "3:20211215-1",
+    "upgrade": "3:20211215-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "klibc-utils",
+    "current": "2.0.10-4ubuntu0.1",
+    "upgrade": "2.0.10-4ubuntu0.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libabsl20210324",
+    "current": "0~20210324.2-2ubuntu0.2",
+    "upgrade": "0~20210324.2-2ubuntu0.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libapparmor1",
+    "current": "3.0.4-2ubuntu2.4",
+    "upgrade": "3.0.4-2ubuntu2.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libapt-pkg6.0",
+    "current": "2.4.13",
+    "upgrade": "2.4.14",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libarchive13",
+    "current": "3.6.0-1ubuntu1.1",
+    "upgrade": "3.6.0-1ubuntu1.7",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libatopology2",
+    "current": "1.2.6.1-1ubuntu1",
+    "upgrade": "1.2.6.1-1ubuntu1.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libblockdev-crypto2",
+    "current": "2.26-1",
+    "upgrade": "2.26-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libblockdev-utils2",
+    "current": "2.26-1",
+    "upgrade": "2.26-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libblockdev2",
+    "current": "2.26-1",
+    "upgrade": "2.26-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libcaca0",
+    "current": "0.99.beta19-2.2ubuntu4",
+    "upgrade": "0.99.beta19-2.2ubuntu4.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libcairo-gobject2",
+    "current": "1.16.0-5ubuntu2",
+    "upgrade": "1.16.0-5ubuntu2.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libcairo-script-interpreter2",
+    "current": "1.16.0-5ubuntu2",
+    "upgrade": "1.16.0-5ubuntu2.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libcairo2",
+    "current": "1.16.0-5ubuntu2",
+    "upgrade": "1.16.0-5ubuntu2.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libcryptsetup12",
+    "current": "2:2.4.3-1ubuntu1.2",
+    "upgrade": "2:2.4.3-1ubuntu1.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libcupsfilters1",
+    "current": "1.28.15-0ubuntu1.2",
+    "upgrade": "1.28.15-0ubuntu1.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libcurl3-gnutls",
+    "current": "7.81.0-1ubuntu1.17",
+    "upgrade": "7.81.0-1ubuntu1.24",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libdconf1",
+    "current": "0.40.0-3",
+    "upgrade": "0.40.0-3ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libdevmapper1.02.1",
+    "current": "2:1.02.175-2.1ubuntu4",
+    "upgrade": "2:1.02.175-2.1ubuntu5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libegl-mesa0",
+    "current": "23.2.1-1ubuntu3.1~22.04.2",
+    "upgrade": "23.2.1-1ubuntu3.1~22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libevdocument3-4",
+    "current": "42.3-0ubuntu3.1",
+    "upgrade": "42.3-0ubuntu3.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libevview3-3",
+    "current": "42.3-0ubuntu3.1",
+    "upgrade": "42.3-0ubuntu3.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libexiv2-27",
+    "current": "0.27.5-3ubuntu1",
+    "upgrade": "0.27.5-3ubuntu1.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libfdisk1",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libfreetype6",
+    "current": "2.11.1+dfsg-1ubuntu0.2",
+    "upgrade": "2.11.1+dfsg-1ubuntu0.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgbm1",
+    "current": "23.2.1-1ubuntu3.1~22.04.2",
+    "upgrade": "23.2.1-1ubuntu3.1~22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgcrypt20",
+    "current": "1.9.4-3ubuntu3",
+    "upgrade": "1.9.4-3ubuntu3.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgdk-pixbuf-2.0-0",
+    "current": "2.42.8+dfsg-1ubuntu0.3",
+    "upgrade": "2.42.8+dfsg-1ubuntu0.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgdk-pixbuf2.0-bin",
+    "current": "2.42.8+dfsg-1ubuntu0.3",
+    "upgrade": "2.42.8+dfsg-1ubuntu0.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgjs0g",
+    "current": "1.72.4-0ubuntu0.22.04.3~really.is.1.72.2.0ubuntu2",
+    "upgrade": "1.72.4-0ubuntu0.22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgl1-mesa-dri",
+    "current": "23.2.1-1ubuntu3.1~22.04.2",
+    "upgrade": "23.2.1-1ubuntu3.1~22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libglapi-mesa",
+    "current": "23.2.1-1ubuntu3.1~22.04.2",
+    "upgrade": "23.2.1-1ubuntu3.1~22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libglx-mesa0",
+    "current": "23.2.1-1ubuntu3.1~22.04.2",
+    "upgrade": "23.2.1-1ubuntu3.1~22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgsf-1-114",
+    "current": "1.14.47-1build2",
+    "upgrade": "1.14.47-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgsf-1-common",
+    "current": "1.14.47-1build2",
+    "upgrade": "1.14.47-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgssapi-krb5-2",
+    "current": "1.19.2-2ubuntu0.4",
+    "upgrade": "1.19.2-2ubuntu0.7",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgstreamer-gl1.0-0",
+    "current": "1.20.1-1ubuntu0.2",
+    "upgrade": "1.20.1-1ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgstreamer-plugins-base1.0-0",
+    "current": "1.20.1-1ubuntu0.2",
+    "upgrade": "1.20.1-1ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgstreamer-plugins-good1.0-0",
+    "current": "1.20.3-0ubuntu1.1",
+    "upgrade": "1.20.3-0ubuntu1.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libgstreamer1.0-0",
+    "current": "1.20.3-0ubuntu1",
+    "upgrade": "1.20.3-0ubuntu1.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libklibc",
+    "current": "2.0.10-4ubuntu0.1",
+    "upgrade": "2.0.10-4ubuntu0.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libkpathsea6",
+    "current": "2021.20210626.59705-1ubuntu0.2",
+    "upgrade": "2021.20210626.59705-1ubuntu0.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libkrb5-3",
+    "current": "1.19.2-2ubuntu0.4",
+    "upgrade": "1.19.2-2ubuntu0.7",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libkrb5support0",
+    "current": "1.19.2-2ubuntu0.4",
+    "upgrade": "1.19.2-2ubuntu0.7",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "liblcms2-utils",
+    "current": "2.12~rc1-2build2",
+    "upgrade": "2.12~rc1-2ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libldap-2.5-0",
+    "current": "2.5.18+dfsg-0ubuntu0.22.04.2",
+    "upgrade": "2.5.20+dfsg-0ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libldap-common",
+    "current": "2.5.18+dfsg-0ubuntu0.22.04.2",
+    "upgrade": "2.5.20+dfsg-0ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "liblzma5",
+    "current": "5.2.5-2ubuntu1",
+    "upgrade": "5.2.5-2ubuntu1.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libmbim-glib4",
+    "current": "1.28.0-1~ubuntu20.04.1",
+    "upgrade": "1.28.0-1~ubuntu20.04.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libmbim-proxy",
+    "current": "1.28.0-1~ubuntu20.04.1",
+    "upgrade": "1.28.0-1~ubuntu20.04.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libmm-glib0",
+    "current": "1.20.0-1~ubuntu22.04.3",
+    "upgrade": "1.20.0-1~ubuntu22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libmount1",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libmutter-10-0",
+    "current": "42.9-0ubuntu8",
+    "upgrade": "42.9-0ubuntu9",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libnautilus-extension1a",
+    "current": "1:42.6-0ubuntu1",
+    "upgrade": "1:42.6-0ubuntu2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libnetplan0",
+    "current": "0.106.1-7ubuntu0.22.04.4",
+    "upgrade": "0.107.1-3ubuntu0.22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libnftables1",
+    "current": "1.0.2-1ubuntu3",
+    "upgrade": "1.0.2-1ubuntu3.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libnghttp2-14",
+    "current": "1.43.0-1ubuntu0.2",
+    "upgrade": "1.43.0-1ubuntu0.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libnm0",
+    "current": "1.36.6-0ubuntu2",
+    "upgrade": "1.36.6-0ubuntu2.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libntfs-3g89",
+    "current": "1:2021.8.22-3ubuntu1.2",
+    "upgrade": "1:2021.8.22-3ubuntu1.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libopenjp2-7",
+    "current": "2.4.0-6",
+    "upgrade": "2.4.0-6ubuntu0.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libpackagekit-glib2-18",
+    "current": "1.2.5-2ubuntu2",
+    "upgrade": "1.2.5-2ubuntu3.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libpam-cap",
+    "current": "1:2.44-1ubuntu0.22.04.1",
+    "upgrade": "1:2.44-1ubuntu0.22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libpam-sss",
+    "current": "2.6.3-1ubuntu3.3",
+    "upgrade": "2.6.3-1ubuntu3.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libpcap0.8",
+    "current": "1.10.1-4build1",
+    "upgrade": "1.10.1-4ubuntu1.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libperl5.34",
+    "current": "5.34.0-3ubuntu1.3",
+    "upgrade": "5.34.0-3ubuntu1.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libpng16-16",
+    "current": "1.6.37-3build5",
+    "upgrade": "1.6.37-3ubuntu0.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libprotobuf23",
+    "current": "3.12.4-1ubuntu7.22.04.1",
+    "upgrade": "3.12.4-1ubuntu7.22.04.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libqpdf28",
+    "current": "10.6.3-1",
+    "upgrade": "10.6.3-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libraptor2-0",
+    "current": "2.0.15-0ubuntu4",
+    "upgrade": "2.0.15-0ubuntu4.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libraw20",
+    "current": "0.20.2-2ubuntu2.22.04.1",
+    "upgrade": "0.20.2-2ubuntu2.22.04.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-base-core",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-calc",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-common",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-core",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-draw",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-gnome",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-gtk3",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-help-common",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-help-en-us",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-impress",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-math",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-ogltrans",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-style-breeze",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-style-colibre",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-style-elementary",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-style-yaru",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libreoffice-writer",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libseccomp2",
+    "current": "2.5.3-2ubuntu2",
+    "upgrade": "2.5.3-2ubuntu3~22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libsmartcols1",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libsmbclient",
+    "current": "2:4.15.13+dfsg-0ubuntu1.10",
+    "upgrade": "2:4.15.13+dfsg-0ubuntu1.12",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libsndfile1",
+    "current": "1.0.31-2ubuntu0.1",
+    "upgrade": "1.0.31-2ubuntu0.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libsnmp40",
+    "current": "5.9.1+dfsg-1ubuntu2.6",
+    "upgrade": "5.9.1+dfsg-1ubuntu2.9",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libsoup2.4-common",
+    "current": "2.74.2-3",
+    "upgrade": "2.74.2-3ubuntu0.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libsqlite3-0",
+    "current": "3.37.2-2ubuntu0.3",
+    "upgrade": "3.37.2-2ubuntu0.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libssl3",
+    "current": "3.0.2-0ubuntu1.18",
+    "upgrade": "3.0.2-0ubuntu1.23",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libsynctex2",
+    "current": "2021.20210626.59705-1ubuntu0.2",
+    "upgrade": "2021.20210626.59705-1ubuntu0.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libtasn1-6",
+    "current": "4.18.0-4build1",
+    "upgrade": "4.18.0-4ubuntu0.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libtiff5",
+    "current": "4.3.0-6ubuntu0.10",
+    "upgrade": "4.3.0-6ubuntu0.13",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libudisks2-0",
+    "current": "2.9.4-1ubuntu2",
+    "upgrade": "2.9.4-1ubuntu2.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libuno-cppu3",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libuno-cppuhelpergcc3-3",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libuno-purpenvhelpergcc3-3",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libuno-sal3",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libuno-salhelpergcc3-3",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libuuid1",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libvpx7",
+    "current": "1.11.0-2ubuntu2.3",
+    "upgrade": "1.11.0-2ubuntu2.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libwbclient0",
+    "current": "2:4.15.13+dfsg-0ubuntu1.10",
+    "upgrade": "2:4.15.13+dfsg-0ubuntu1.12",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libwww-perl",
+    "current": "6.61-1",
+    "upgrade": "6.61-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libxatracker2",
+    "current": "23.2.1-1ubuntu3.1~22.04.2",
+    "upgrade": "23.2.1-1ubuntu3.1~22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "libxslt1.1",
+    "current": "1.1.34-4ubuntu0.22.04.1",
+    "upgrade": "1.1.34-4ubuntu0.22.04.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "linux-base",
+    "current": "4.5ubuntu9",
+    "upgrade": "4.5ubuntu9+22.04.1",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "linux-firmware",
+    "current": "20220329.git681281e4-0ubuntu3.40",
+    "upgrade": "20220329.git681281e4-0ubuntu3.42",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "linux-generic-hwe-22.04",
+    "current": "6.8.0-111.111~22.04.1",
+    "upgrade": "6.8.0-124.124~22.04.1",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "linux-headers-generic-hwe-22.04",
+    "current": "6.8.0-111.111~22.04.1",
+    "upgrade": "6.8.0-124.124~22.04.1",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "linux-image-generic-hwe-22.04",
+    "current": "6.8.0-111.111~22.04.1",
+    "upgrade": "6.8.0-124.124~22.04.1",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "linux-libc-dev",
+    "current": "5.15.0-177.187",
+    "upgrade": "5.15.0-181.191",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "linux-tools-common",
+    "current": "5.15.0-119.129",
+    "upgrade": "5.15.0-181.191",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "lshw",
+    "current": "02.19.git.2021.06.19.996aaad9c7-2build1",
+    "upgrade": "02.19.git.2021.06.19.996aaad9c7-2ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "mesa-vulkan-drivers",
+    "current": "23.2.1-1ubuntu3.1~22.04.2",
+    "upgrade": "23.2.1-1ubuntu3.1~22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "modemmanager",
+    "current": "1.20.0-1~ubuntu22.04.3",
+    "upgrade": "1.20.0-1~ubuntu22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "mutter-common",
+    "current": "42.9-0ubuntu8",
+    "upgrade": "42.9-0ubuntu9",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "nano",
+    "current": "6.2-1ubuntu0.1",
+    "upgrade": "6.2-1ubuntu0.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "nautilus-data",
+    "current": "1:42.6-0ubuntu1",
+    "upgrade": "1:42.6-0ubuntu2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "nautilus",
+    "current": "1:42.6-0ubuntu1",
+    "upgrade": "1:42.6-0ubuntu2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "netplan.io",
+    "current": "0.106.1-7ubuntu0.22.04.4",
+    "upgrade": "0.107.1-3ubuntu0.22.04.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "network-manager-config-connectivity-ubuntu",
+    "current": "1.36.6-0ubuntu2",
+    "upgrade": "1.36.6-0ubuntu2.4",
+    "category": "Network Patch",
+    "risk": "Medium",
+    "service": "Networking"
+  },
+  {
+    "package": "network-manager-openvpn-gnome",
+    "current": "1.8.18-1",
+    "upgrade": "1.8.18-1ubuntu0.2",
+    "category": "Network Patch",
+    "risk": "Medium",
+    "service": "Networking"
+  },
+  {
+    "package": "network-manager-openvpn",
+    "current": "1.8.18-1",
+    "upgrade": "1.8.18-1ubuntu0.2",
+    "category": "Network Patch",
+    "risk": "Medium",
+    "service": "Networking"
+  },
+  {
+    "package": "network-manager",
+    "current": "1.36.6-0ubuntu2",
+    "upgrade": "1.36.6-0ubuntu2.4",
+    "category": "Network Patch",
+    "risk": "Medium",
+    "service": "Networking"
+  },
+  {
+    "package": "nftables",
+    "current": "1.0.2-1ubuntu3",
+    "upgrade": "1.0.2-1ubuntu3.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ntfs-3g",
+    "current": "1:2021.8.22-3ubuntu1.2",
+    "upgrade": "1:2021.8.22-3ubuntu1.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "openvpn",
+    "current": "2.5.9-0ubuntu0.22.04.3",
+    "upgrade": "2.5.11-0ubuntu0.22.04.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "packagekit-tools",
+    "current": "1.2.5-2ubuntu2",
+    "upgrade": "1.2.5-2ubuntu3.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "packagekit",
+    "current": "1.2.5-2ubuntu2",
+    "upgrade": "1.2.5-2ubuntu3.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "pci.ids",
+    "current": "0.0~2022.01.22-1",
+    "upgrade": "0.0~2022.01.22-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "perl-base",
+    "current": "5.34.0-3ubuntu1.3",
+    "upgrade": "5.34.0-3ubuntu1.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "perl-modules-5.34",
+    "current": "5.34.0-3ubuntu1.3",
+    "upgrade": "5.34.0-3ubuntu1.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "perl",
+    "current": "5.34.0-3ubuntu1.3",
+    "upgrade": "5.34.0-3ubuntu1.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "powermgmt-base",
+    "current": "1.36",
+    "upgrade": "1.36ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "python-apt-common",
+    "current": "2.4.0ubuntu4",
+    "upgrade": "2.4.0ubuntu4.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "python3-cryptography",
+    "current": "3.4.8-1ubuntu2.2",
+    "upgrade": "3.4.8-1ubuntu2.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "python3-paramiko",
+    "current": "2.9.3-0ubuntu1.2",
+    "upgrade": "2.9.3-0ubuntu1.3",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "python3-protobuf",
+    "current": "3.12.4-1ubuntu7.22.04.1",
+    "upgrade": "3.12.4-1ubuntu7.22.04.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "python3-uno",
+    "current": "1:7.3.7-0ubuntu0.22.04.10",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "python3-update-manager",
+    "current": "1:22.04.21",
+    "upgrade": "1:22.04.22",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "python3-urllib3",
+    "current": "1.26.5-1~exp1ubuntu0.6",
+    "upgrade": "1.26.5-1~exp1ubuntu0.7",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "rfkill",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "rsync",
+    "current": "3.2.7-0ubuntu0.22.04.2",
+    "upgrade": "3.2.7-0ubuntu0.22.04.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "samba-libs",
+    "current": "2:4.15.13+dfsg-0ubuntu1.10",
+    "upgrade": "2:4.15.13+dfsg-0ubuntu1.12",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "snapd",
+    "current": "2.63+22.04ubuntu0.1",
+    "upgrade": "2.75.2+ubuntu22.04",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "systemd-hwe-hwdb",
+    "current": "249.11.5",
+    "upgrade": "249.11.6",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "tzdata",
+    "current": "2025b-0ubuntu0.22.04.1",
+    "upgrade": "2026a-0ubuntu0.22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-advantage-tools",
+    "current": "33.2~22.04",
+    "upgrade": "37.2ubuntu~22.04",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-desktop-minimal",
+    "current": "1.481.3",
+    "upgrade": "1.481.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-desktop",
+    "current": "1.481.3",
+    "upgrade": "1.481.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-drivers-common",
+    "current": "1:0.9.6.2~0.22.04.8",
+    "upgrade": "1:0.9.6.2~0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-minimal",
+    "current": "1.481.3",
+    "upgrade": "1.481.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-pro-client-l10n",
+    "current": "33.2~22.04",
+    "upgrade": "37.2ubuntu~22.04",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-pro-client",
+    "current": "33.2~22.04",
+    "upgrade": "37.2ubuntu~22.04",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-report",
+    "current": "1.7.1",
+    "upgrade": "1.7.1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ubuntu-standard",
+    "current": "1.481.3",
+    "upgrade": "1.481.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "uno-libs-private",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "update-manager-core",
+    "current": "1:22.04.21",
+    "upgrade": "1:22.04.22",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "update-manager",
+    "current": "1:22.04.21",
+    "upgrade": "1:22.04.22",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "ure",
+    "current": "1:7.3.7-0ubuntu0.22.04.6",
+    "upgrade": "1:7.3.7-0ubuntu0.22.04.11",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "usbmuxd",
+    "current": "1.1.1-2build2",
+    "upgrade": "1.1.1-2ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "util-linux",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "Kernel Update",
+    "risk": "High",
+    "service": "Kernel"
+  },
+  {
+    "package": "uuid-runtime",
+    "current": "2.37.2-4ubuntu3.4",
+    "upgrade": "2.37.2-4ubuntu3.5",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "vim-common",
+    "current": "2:8.2.3995-1ubuntu2.29",
+    "upgrade": "2:8.2.3995-1ubuntu2.30",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "vim-tiny",
+    "current": "2:8.2.3995-1ubuntu2.29",
+    "upgrade": "2:8.2.3995-1ubuntu2.30",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "wireless-regdb",
+    "current": "2022.06.06-0ubuntu1~22.04.1",
+    "upgrade": "2025.10.07-0ubuntu1~22.04.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "wpasupplicant",
+    "current": "2:2.10-6ubuntu2.2",
+    "upgrade": "2:2.10-6ubuntu2.4",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "xdg-dbus-proxy",
+    "current": "0.1.3-1",
+    "upgrade": "0.1.3-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "xdg-desktop-portal",
+    "current": "1.14.4-1ubuntu2~22.04.1",
+    "upgrade": "1.14.4-1ubuntu2~22.04.2",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "xserver-xephyr",
+    "current": "2:21.1.4-2ubuntu1.7~22.04.11",
+    "upgrade": "2:21.1.4-2ubuntu1.7~22.04.16",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "xserver-xorg-core",
+    "current": "2:21.1.4-2ubuntu1.7~22.04.11",
+    "upgrade": "2:21.1.4-2ubuntu1.7~22.04.16",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "xwayland",
+    "current": "2:22.1.1-1ubuntu0.13",
+    "upgrade": "2:22.1.1-1ubuntu0.20",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "xxd",
+    "current": "2:8.2.3995-1ubuntu2.18",
+    "upgrade": "2:8.2.3995-1ubuntu2.30",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "xz-utils",
+    "current": "5.2.5-2ubuntu1",
+    "upgrade": "5.2.5-2ubuntu1.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  },
+  {
+    "package": "yelp-xsl",
+    "current": "42.0-1",
+    "upgrade": "42.0-1ubuntu0.1",
+    "category": "General Package Update",
+    "risk": "Low",
+    "service": "System Package"
+  }
+]
