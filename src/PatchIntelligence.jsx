@@ -165,6 +165,9 @@ export default function PatchIntelligence({ role, onShowToast }) {
   const [activePatch, setActivePatch] = useState(null);
   const [ganttOpen, setGanttOpen] = useState(false);
   const [ganttTarget, setGanttTarget] = useState(null);
+  const [currentPatchPackage, setCurrentPatchPackage] = useState(null);
+  const [patchSignalDone, setPatchSignalDone] = useState(false);
+  const [nextPatchMessage, setNextPatchMessage] = useState('');
   const [allData, setAllData]           = useState([]);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [filter, setFilter]             = useState('');
@@ -251,7 +254,16 @@ export default function PatchIntelligence({ role, onShowToast }) {
         const res = await fetch(`/api/patches/${encodeURIComponent(activePatch.package)}/approve`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: role }) });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
-        setAllData(prev => prev.map(p => p.package === activePatch.package ? { ...p, status: 'Approved', action: 'Approved' } : p));
+        setAllData(prev => prev.map(p => {
+          if (p.package !== activePatch.package) return p;
+          const approvedPatch = { ...p, status: 'Approved' };
+          if (String(p.risk || '').toLowerCase() === 'high') {
+            approvedPatch.action = 'Update Scheduled';
+          } else {
+            approvedPatch.action = 'Approved';
+          }
+          return approvedPatch;
+        }));
         if (onShowToast) onShowToast(`${activePatch.package} approved`);
         setModalOpen(false);
       } catch (err) {
@@ -283,35 +295,72 @@ export default function PatchIntelligence({ role, onShowToast }) {
     setGanttOpen(true);
   };
 
-  const buildSchedule = () => {
-    // schedule SAFE risk rows using priority
-    const safe = allData.filter(p => String(p.risk || '').toLowerCase() === 'safe');
-    // split into already scheduled and unscheduled
-    const scheduled = safe.filter(p => p.scheduled).map(p => ({ ...p, startDay: Number(p.scheduled.startDay) || 0, durationDays: Number(p.scheduled.durationDays) || 1 }));
-    const unscheduled = safe.filter(p => !p.scheduled).slice().sort((a, b) => {
+  const handleSendNextPatch = () => {
+    const patch = getNextQueuePatch(currentPatchPackage || ganttTarget?.package);
+    if (!patch) {
+      setNextPatchMessage('No next patch available in the queue');
+      return;
+    }
+    postNextPatchUpdate(patch.package);
+  };
+
+  const handleSendSelectedPatch = () => {
+    if (!ganttTarget) {
+      setNextPatchMessage('No patch selected in Gantt chart');
+      return;
+    }
+    postNextPatchUpdate(ganttTarget.package);
+  };
+
+  const postNextPatchUpdate = async (packageName) => {
+    try {
+      const res = await fetch('/api/next-patchupdate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ packageName }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      setCurrentPatchPackage(json.packageName);
+      setPatchSignalDone(false);
+      setNextPatchMessage(`Sent ${json.packageName} to next-patchupdate`);
+    } catch (err) {
+      console.error('Next patch update failed', err);
+      setNextPatchMessage(`Next patch update failed: ${err.message}`);
+    }
+  };
+
+  const checkPatchSignal = async () => {
+    try {
+      const res = await fetch('/api/next-patchupdate');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      setPatchSignalDone(json.done === 1);
+      setNextPatchMessage(json.done === 1 ? `Signal done for ${json.packageName}` : `Waiting for completion of ${json.packageName}`);
+    } catch (err) {
+      console.error('Signal check failed', err);
+      setNextPatchMessage(`Signal check failed: ${err.message}`);
+    }
+  };
+
+  const getScheduledQueue = () => {
+    const safe = allData.filter(p => String(p.risk || '').toLowerCase() === 'safe').slice().sort((a, b) => {
       const pa = parsePriority(a.priority);
       const pb = parsePriority(b.priority);
       if (pa !== pb) return pa - pb;
       return a.package.localeCompare(b.package);
     });
+    const highApproved = allData.filter(p => String(p.risk || '').toLowerCase() === 'high' && p.status === 'Approved');
+    return [...safe, ...highApproved].map((s, index) => ({ ...s, position: index + 1 }));
+  };
 
-    // durations per priority: P1=3d, P2=2d, P3=1d, fallback 1
-    const prToDur = pr => (pr === 1 ? 3 : pr === 2 ? 2 : pr === 3 ? 1 : 1);
-
-    // place unscheduled after all scheduled ends
-    const scheduledSorted = scheduled.slice().sort((a, b) => a.startDay - b.startDay);
-    const lastScheduledEnd = scheduledSorted.reduce((mx, s) => Math.max(mx, s.startDay + s.durationDays), 0);
-    let day = lastScheduledEnd;
-
-    const assigned = unscheduled.map(s => {
-      const pr = parsePriority(s.priority);
-      const duration = prToDur(pr);
-      const node = { ...s, startDay: day, durationDays: duration };
-      day += duration;
-      return node;
-    });
-
-    return [...scheduledSorted, ...assigned];
+  const getNextQueuePatch = (currentPackage) => {
+    const queue = getScheduledQueue();
+    if (queue.length === 0) return null;
+    if (!currentPackage) return queue[0];
+    const foundIndex = queue.findIndex(p => p.package === currentPackage);
+    if (foundIndex === -1 || foundIndex === queue.length - 1) return null;
+    return queue[foundIndex + 1];
   };
 
   // helper for safe DOM ids
@@ -497,10 +546,11 @@ export default function PatchIntelligence({ role, onShowToast }) {
             {/* Action */}
             <td className="py-4 px-4">
               {(() => {
-                const isSafe = String(patch.risk || '').toLowerCase() === 'safe';
-                const isScheduled = isSafe || patch.scheduled != null;
-                const scheduledDay = patch.scheduled ? Number(patch.scheduled.startDay) + 1 : null;
-                const label = isScheduled ? (scheduledDay ? `Update Scheduled · Day ${scheduledDay}` : 'Update Scheduled') : patch.action;
+                const normalizedRisk = String(patch.risk || '').toLowerCase();
+                const isHighApproved = normalizedRisk === 'high' && patch.status === 'Approved';
+                const isSafe = normalizedRisk === 'safe';
+                const isScheduled = isSafe || isHighApproved || patch.scheduled != null;
+                const label = isScheduled ? 'Update Scheduled' : patch.action;
                 return (
                   <button
                     onClick={() => isScheduled ? handleShowSchedule(patch) : handleAnalyze(patch)}
@@ -602,22 +652,21 @@ export default function PatchIntelligence({ role, onShowToast }) {
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-bold">Update Schedule</h3>
                   <div className="flex items-center gap-3">
-                    <div className="text-sm text-slate-400">Showing SAFE updates</div>
+                    <div className="text-sm text-slate-400">Showing SAFE updates (approved HIGH risk will append at the end)</div>
                     <button className="text-slate-400 hover:text-white" onClick={() => setGanttOpen(false)} aria-label="Close gantt">Close</button>
                   </div>
                 </div>
 
                 <div className="mt-4">
-                  <p className="text-sm text-slate-400">Queue based on `Priority` column. Highlight shows selected update.</p>
+                  <p className="text-sm text-slate-400">Sequential queue based on the `Priority` column — one update runs after another. Highlight shows the selected update.</p>
                 </div>
 
                 <div className="mt-6 overflow-x-auto">
                   <div className="flex items-end gap-6 py-6" style={{ minWidth: '800px' }}>
-                    {buildSchedule().map((node, idx) => {
+                    {getScheduledQueue().map((node, idx) => {
                       const isActive = ganttTarget && node.package === ganttTarget.package;
-                      const width = Math.max(120, node.durationDays * 120);
                       return (
-                        <div key={idx} className="flex flex-col items-center" style={{ minWidth: width }}>
+                        <div key={idx} className="flex flex-col items-center" style={{ minWidth: 160 }}>
                           <div
                             id={idFor(node.package)}
                             onClick={() => { setActivePatch(node); setModalOpen(true); setGanttTarget(node); }}
@@ -627,33 +676,33 @@ export default function PatchIntelligence({ role, onShowToast }) {
                           >
                             <div className="text-sm font-semibold truncate px-2">{node.package}</div>
                           </div>
-                          <div className="mt-3 text-xs text-slate-400">Day {node.startDay + 1} · {node.durationDays}d</div>
+                          <div className="mt-3 text-xs text-slate-400">Position {idx + 1}</div>
                         </div>
                       );
                     })}
                   </div>
 
-                  {role === 'admin' && ganttTarget && (
-                    <div className="mt-4 flex items-center justify-end gap-3">
+                  <div className="mt-4 flex flex-col gap-3">
+                    <div className="text-sm text-slate-400">Current next-patchupdate status: {currentPatchPackage || 'none selected'}</div>
+                    {nextPatchMessage && <div className="text-sm text-slate-300">{nextPatchMessage}</div>}
+                    <div className="flex flex-wrap gap-3">
                       <button
-                        onClick={async () => {
-                          try {
-                            const pkg = ganttTarget.package;
-                            const res = await fetch(`/api/patches/${encodeURIComponent(pkg)}/schedule`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ startDay: ganttTarget.startDay, durationDays: ganttTarget.durationDays }) });
-                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                            const json = await res.json();
-                            // update local state to reflect scheduled
-                            setAllData(prev => prev.map(p => p.package === pkg ? { ...p, scheduled: json.scheduled, action: 'Update Scheduled' } : p));
-                            if (onShowToast) onShowToast(`${pkg} scheduled`);
-                          } catch (err) {
-                            console.error('Schedule persist failed', err);
-                            if (onShowToast) onShowToast(`Schedule failed: ${err.message}`);
-                          }
-                        }}
+                        onClick={handleSendSelectedPatch}
                         className="px-4 py-2 rounded-xl bg-indigo-600 text-white"
-                      >Persist Schedule</button>
+                      >Send Selected Patch</button>
+                      <button
+                        onClick={handleSendNextPatch}
+                        className="px-4 py-2 rounded-xl bg-emerald-600 text-white"
+                      >Send Next Patch</button>
+                      <button
+                        onClick={checkPatchSignal}
+                        className="px-4 py-2 rounded-xl bg-slate-700 text-white"
+                      >Check Completion Signal</button>
+                      {patchSignalDone && (
+                        <span className="px-4 py-2 rounded-xl bg-emerald-500/15 text-emerald-400">Done signal received</span>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>

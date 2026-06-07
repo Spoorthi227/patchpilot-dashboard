@@ -15,6 +15,8 @@ const EXCEL_PATH =
 // In-memory persistence for approvals and schedules (demo only)
 const statuses = {};
 const schedules = {};
+let currentPatch = null;
+let currentPatchDone = false;
 
 function getSeverity(risk) {
     const r = (risk || "").toLowerCase();
@@ -112,6 +114,28 @@ app.get("/api/patches", (req, res) => {
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");
+});
+
+app.post('/api/next-patchupdate', (req, res) => {
+    const pkg = req.body?.packageName;
+    if (!pkg) {
+        return res.status(400).json({ error: 'packageName is required' });
+    }
+    currentPatch = pkg;
+    currentPatchDone = false;
+    res.json({ ok: true, packageName: pkg, done: 0 });
+});
+
+app.get('/api/next-patchupdate', (req, res) => {
+    res.json({ ok: true, packageName: currentPatch, done: currentPatchDone ? 1 : 0 });
+});
+
+app.post('/api/next-patchupdate/complete', (req, res) => {
+    const pkg = req.body?.packageName;
+    if (pkg && currentPatch === pkg) {
+        currentPatchDone = true;
+    }
+    res.json({ ok: true, packageName: currentPatch, done: currentPatchDone ? 1 : 0 });
 });
 
 // Approve a package
