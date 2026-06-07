@@ -7,9 +7,14 @@ import cors from "cors";
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 const EXCEL_PATH =
 "C:/Users/Spoorthi R/OneDrive/Documents/updates_data.xlsx";
+
+// In-memory persistence for approvals and schedules (demo only)
+const statuses = {};
+const schedules = {};
 
 function getSeverity(risk) {
     const r = (risk || "").toLowerCase();
@@ -64,6 +69,10 @@ app.get("/api/patches", (req, res) => {
             affectedDependencies:
                 row.affectedDependencies || row.AffectedDependencies || 'None',
 
+            // read numeric priority if present
+            priority:
+                row.Priority != null ? Number(row.Priority) : (row.priority != null ? Number(row.priority) : (row.PriorityLevel != null ? Number(row.PriorityLevel) : undefined)),
+
             affectedOs:
                 "Ubuntu 24.04 LTS",
 
@@ -76,6 +85,18 @@ app.get("/api/patches", (req, res) => {
             action:
                 "Approval Needed"
         }));
+
+        // apply in-memory overrides (status/schedule)
+        data.forEach(item => {
+            if (statuses[item.package]) {
+                item.status = statuses[item.package].status;
+                item.action = statuses[item.package].action || item.action;
+            }
+            if (schedules[item.package]) {
+                item.scheduled = schedules[item.package];
+                item.action = 'Update Scheduled';
+            }
+        });
 
         res.json(data);
 
@@ -91,4 +112,26 @@ app.get("/api/patches", (req, res) => {
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");
+});
+
+// Approve a package
+app.post('/api/patches/:pkg/approve', (req, res) => {
+    const pkg = decodeURIComponent(req.params.pkg);
+    statuses[pkg] = { status: 'Approved', action: 'Approved', by: req.body?.by || 'unknown', at: new Date().toISOString() };
+    res.json({ ok: true, package: pkg, status: 'Approved' });
+});
+
+// Reject a package
+app.post('/api/patches/:pkg/reject', (req, res) => {
+    const pkg = decodeURIComponent(req.params.pkg);
+    statuses[pkg] = { status: 'Rejected', action: 'Rejected', by: req.body?.by || 'unknown', at: new Date().toISOString() };
+    res.json({ ok: true, package: pkg, status: 'Rejected' });
+});
+
+// Schedule a package update
+app.post('/api/patches/:pkg/schedule', (req, res) => {
+    const pkg = decodeURIComponent(req.params.pkg);
+    const { startDay, durationDays } = req.body || {};
+    schedules[pkg] = { startDay: Number(startDay) || 0, durationDays: Number(durationDays) || 1, at: new Date().toISOString() };
+    res.json({ ok: true, package: pkg, scheduled: schedules[pkg] });
 });

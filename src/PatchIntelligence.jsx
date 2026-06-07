@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ShieldAlert, ShieldCheck, Clock, Search, Filter, CheckCircle, XCircle, Info, ChevronDown, AlertTriangle, SquareDivide } from 'lucide-react';
+import { X } from 'lucide-react';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -53,6 +54,15 @@ function augmentEntry(entry) {
         ? entry.affectedDependencies
         : 'None',
 
+    scheduled: entry.scheduled || null,
+
+    // Priority from excel/CSV: handle different casings
+    priority: (() => {
+      const raw = entry.priority ?? entry.Priority ?? entry.PriorityLevel ?? entry.PriorityLevel;
+      const n = Number(raw);
+      return Number.isFinite(n) ? n : 4; // 1..3 expected, fallback to 4 (unscheduled)
+    })(),
+
     affectedOs:
       entry.affectedOs ||
       'Ubuntu 24.04 LTS',
@@ -69,6 +79,36 @@ function augmentEntry(entry) {
       entry.action ||
       'Approval Needed',
   };
+}
+
+function parseAffectedDependencies(raw) {
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw.map(String);
+  const s = String(raw).trim();
+  if (!s || s.toLowerCase() === 'none') return [];
+
+  // try JSON array/object
+  try {
+    const parsed = JSON.parse(s);
+    if (Array.isArray(parsed)) return parsed.map(String);
+    if (parsed && typeof parsed === 'object') return Object.entries(parsed).map(([k, v]) => `${k}${v ? `@${v}` : ''}`);
+  } catch (e) {
+    // not json
+  }
+
+  // split on newlines, commas, semicolons, pipes
+  const parts = s.split(/[\r\n,;|]+/).map(p => p.trim()).filter(Boolean);
+  return parts;
+}
+
+function parsePriority(p) {
+  if (p == null) return 4;
+  // If already a finite number, use it (1..3 expected)
+  if (typeof p === 'number' && Number.isFinite(p)) return p;
+  // Try numeric coercion for string values
+  const n = Number(p);
+  if (Number.isFinite(n)) return Math.round(n);
+  return 4;
 }
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
@@ -121,6 +161,10 @@ const ALL_COLUMNS = [
 ];
 
 export default function PatchIntelligence({ role, onShowToast }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activePatch, setActivePatch] = useState(null);
+  const [ganttOpen, setGanttOpen] = useState(false);
+  const [ganttTarget, setGanttTarget] = useState(null);
   const [allData, setAllData]           = useState([]);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [filter, setFilter]             = useState('');
@@ -194,9 +238,94 @@ export default function PatchIntelligence({ role, onShowToast }) {
 
   // ── Action handlers ──────────────────────────────────────────────────────
   const handleAnalyze = (patch) => {
-    if (onShowToast) onShowToast(`Analyzing: ${patch.package}`);
-    console.log('Analyze', patch.package);
+    // Open detailed approval modal
+    setActivePatch(patch);
+    setModalOpen(true);
   };
+
+  const handleApprove = () => {
+    if (!activePatch) return;
+    // call backend to persist
+    (async () => {
+      try {
+        const res = await fetch(`/api/patches/${encodeURIComponent(activePatch.package)}/approve`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: role }) });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        setAllData(prev => prev.map(p => p.package === activePatch.package ? { ...p, status: 'Approved', action: 'Approved' } : p));
+        if (onShowToast) onShowToast(`${activePatch.package} approved`);
+        setModalOpen(false);
+      } catch (err) {
+        console.error('Approve failed', err);
+        if (onShowToast) onShowToast(`Approve failed: ${err.message}`);
+      }
+    })();
+  };
+
+  const handleReject = () => {
+    if (!activePatch) return;
+    (async () => {
+      try {
+        const res = await fetch(`/api/patches/${encodeURIComponent(activePatch.package)}/reject`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: role }) });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        setAllData(prev => prev.map(p => p.package === activePatch.package ? { ...p, status: 'Rejected', action: 'Rejected' } : p));
+        if (onShowToast) onShowToast(`${activePatch.package} rejected`);
+        setModalOpen(false);
+      } catch (err) {
+        console.error('Reject failed', err);
+        if (onShowToast) onShowToast(`Reject failed: ${err.message}`);
+      }
+    })();
+  };
+
+  const handleShowSchedule = (patch) => {
+    setGanttTarget(patch);
+    setGanttOpen(true);
+  };
+
+  const buildSchedule = () => {
+    // schedule SAFE risk rows using priority
+    const safe = allData.filter(p => String(p.risk || '').toLowerCase() === 'safe');
+    // split into already scheduled and unscheduled
+    const scheduled = safe.filter(p => p.scheduled).map(p => ({ ...p, startDay: Number(p.scheduled.startDay) || 0, durationDays: Number(p.scheduled.durationDays) || 1 }));
+    const unscheduled = safe.filter(p => !p.scheduled).slice().sort((a, b) => {
+      const pa = parsePriority(a.priority);
+      const pb = parsePriority(b.priority);
+      if (pa !== pb) return pa - pb;
+      return a.package.localeCompare(b.package);
+    });
+
+    // durations per priority: P1=3d, P2=2d, P3=1d, fallback 1
+    const prToDur = pr => (pr === 1 ? 3 : pr === 2 ? 2 : pr === 3 ? 1 : 1);
+
+    // place unscheduled after all scheduled ends
+    const scheduledSorted = scheduled.slice().sort((a, b) => a.startDay - b.startDay);
+    const lastScheduledEnd = scheduledSorted.reduce((mx, s) => Math.max(mx, s.startDay + s.durationDays), 0);
+    let day = lastScheduledEnd;
+
+    const assigned = unscheduled.map(s => {
+      const pr = parsePriority(s.priority);
+      const duration = prToDur(pr);
+      const node = { ...s, startDay: day, durationDays: duration };
+      day += duration;
+      return node;
+    });
+
+    return [...scheduledSorted, ...assigned];
+  };
+
+  // helper for safe DOM ids
+  const idFor = (pkg) => `gantt-node-${String(pkg || '').replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+
+  // scroll gantt to highlighted node when opening
+  useEffect(() => {
+    if (!ganttOpen || !ganttTarget) return;
+    const id = idFor(ganttTarget.package);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    }, 50);
+  }, [ganttOpen, ganttTarget]);
 
   // ── Render ───────────────────────────────────────────────────────────────
   return (
@@ -367,13 +496,21 @@ export default function PatchIntelligence({ role, onShowToast }) {
 
             {/* Action */}
             <td className="py-4 px-4">
-              <button
-                onClick={() => handleAnalyze(patch)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all duration-200"
-              >
-                <SquareDivide size={14} />
-                {patch.action}
-              </button>
+              {(() => {
+                const isSafe = String(patch.risk || '').toLowerCase() === 'safe';
+                const isScheduled = isSafe || patch.scheduled != null;
+                const scheduledDay = patch.scheduled ? Number(patch.scheduled.startDay) + 1 : null;
+                const label = isScheduled ? (scheduledDay ? `Update Scheduled · Day ${scheduledDay}` : 'Update Scheduled') : patch.action;
+                return (
+                  <button
+                    onClick={() => isScheduled ? handleShowSchedule(patch) : handleAnalyze(patch)}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg ${isScheduled ? 'bg-emerald-600 text-white border border-emerald-500/20 hover:scale-105' : 'bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 hover:bg-indigo-500 hover:text-white'} transition-all duration-200`}
+                  >
+                    <SquareDivide size={14} />
+                    {label}
+                  </button>
+                );
+              })()}
             </td>
           </tr>
         ))}
@@ -381,6 +518,147 @@ export default function PatchIntelligence({ role, onShowToast }) {
     </table>
   </div>
 )}
+
+      {/* Approval Modal */}
+      {modalOpen && activePatch && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
+          <div className="relative w-full max-w-3xl mx-4">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800/50 p-6 text-slate-200 shadow-2xl">
+              <div className="flex justify-between items-start gap-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-white">Patch approval — {activePatch.package}</h2>
+                  <p className="text-sm text-slate-400 mt-1">{activePatch.description}</p>
+                </div>
+                <button className="text-slate-400 hover:text-white" onClick={() => setModalOpen(false)} aria-label="Close modal">
+                  <X />
+                </button>
+              </div>
+
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <p className="text-xs text-slate-400 uppercase font-black tracking-widest">Details</p>
+                  <div className="text-sm text-slate-300">
+                    <p><strong>Category:</strong> {activePatch.category}</p>
+                    <p><strong>CVE:</strong> {activePatch.cve}</p>
+                    <p><strong>Severity:</strong> {activePatch.severity}</p>
+                    <p><strong>EPSS:</strong> {activePatch.epss}</p>
+                    <p><strong>Affected OS:</strong> {activePatch.affectedOs}</p>
+                    <p><strong>Date:</strong> {activePatch.date}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <p className="text-xs text-slate-400 uppercase font-black tracking-widest">Affected Dependencies</p>
+                  <div className="text-sm text-slate-300 bg-slate-800/30 p-4 rounded-lg max-h-40 overflow-auto">
+                    {(() => {
+                      const deps = parseAffectedDependencies(activePatch.affectedDependencies);
+                      if (deps.length === 0) return <p className="text-slate-500">No downstream packages affected.</p>;
+                      return (
+                        <div className="flex flex-wrap gap-2">
+                          {deps.map((d, idx) => (
+                            <span key={idx} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/60 text-sm text-slate-200 border border-slate-700">
+                              <svg className="w-3 h-3 text-indigo-400" viewBox="0 0 8 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="4" /></svg>
+                              <span className="truncate max-w-[220px]">{d}</span>
+                            </span>
+                          ))}
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  <p className="text-xs text-slate-400 uppercase font-black tracking-widest">Potential Impact</p>
+                  <div className="text-sm text-slate-300 bg-slate-800/20 p-3 rounded-lg">
+                    <p>This update may change library ABI or require service restarts. Review change logs and schedule maintenance window if high severity.</p>
+                  </div>
+                </div>
+              </div>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <div className="text-sm text-slate-400">Role: <span className="text-slate-200 font-bold">{role}</span></div>
+                  <div className="flex items-center gap-3">
+                    {role === 'admin' ? (
+                      <>
+                        <button onClick={handleReject} className="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500 hover:text-white transition">Reject</button>
+                        <button onClick={handleApprove} className="px-4 py-2 rounded-xl bg-emerald-500 text-white font-bold">Approve</button>
+                        <button onClick={() => handleShowSchedule(activePatch)} className="px-4 py-2 rounded-xl bg-indigo-600 text-white">View Schedule</button>
+                      </>
+                    ) : (
+                      <div className="px-4 py-2 rounded-xl bg-slate-800 text-slate-400 border border-slate-700">Only admins can modify and approve</div>
+                    )}
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+        {/* Gantt Modal */}
+        {ganttOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setGanttOpen(false)} />
+            <div className="relative w-full max-w-5xl mx-4">
+              <div className="bg-slate-900 rounded-2xl border border-slate-800/50 p-6 text-slate-200 shadow-2xl">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-xl font-bold">Update Schedule</h3>
+                  <div className="flex items-center gap-3">
+                    <div className="text-sm text-slate-400">Showing SAFE updates</div>
+                    <button className="text-slate-400 hover:text-white" onClick={() => setGanttOpen(false)} aria-label="Close gantt">Close</button>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <p className="text-sm text-slate-400">Queue based on `Priority` column. Highlight shows selected update.</p>
+                </div>
+
+                <div className="mt-6 overflow-x-auto">
+                  <div className="flex items-end gap-6 py-6" style={{ minWidth: '800px' }}>
+                    {buildSchedule().map((node, idx) => {
+                      const isActive = ganttTarget && node.package === ganttTarget.package;
+                      const width = Math.max(120, node.durationDays * 120);
+                      return (
+                        <div key={idx} className="flex flex-col items-center" style={{ minWidth: width }}>
+                          <div
+                            id={idFor(node.package)}
+                            onClick={() => { setActivePatch(node); setModalOpen(true); setGanttTarget(node); }}
+                            role="button"
+                            tabIndex={0}
+                            className={`h-12 w-full rounded-lg flex items-center justify-center cursor-pointer transition-transform ${isActive ? 'bg-indigo-500 text-white scale-105 ring-2 ring-indigo-400' : 'bg-slate-800 text-slate-300 hover:scale-105'}`}
+                          >
+                            <div className="text-sm font-semibold truncate px-2">{node.package}</div>
+                          </div>
+                          <div className="mt-3 text-xs text-slate-400">Day {node.startDay + 1} · {node.durationDays}d</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {role === 'admin' && ganttTarget && (
+                    <div className="mt-4 flex items-center justify-end gap-3">
+                      <button
+                        onClick={async () => {
+                          try {
+                            const pkg = ganttTarget.package;
+                            const res = await fetch(`/api/patches/${encodeURIComponent(pkg)}/schedule`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ startDay: ganttTarget.startDay, durationDays: ganttTarget.durationDays }) });
+                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                            const json = await res.json();
+                            // update local state to reflect scheduled
+                            setAllData(prev => prev.map(p => p.package === pkg ? { ...p, scheduled: json.scheduled, action: 'Update Scheduled' } : p));
+                            if (onShowToast) onShowToast(`${pkg} scheduled`);
+                          } catch (err) {
+                            console.error('Schedule persist failed', err);
+                            if (onShowToast) onShowToast(`Schedule failed: ${err.message}`);
+                          }
+                        }}
+                        className="px-4 py-2 rounded-xl bg-indigo-600 text-white"
+                      >Persist Schedule</button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* View More footer */}
         {!fetchError && hasMore && (
